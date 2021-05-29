@@ -54,6 +54,7 @@ def login(auth_details: AuthDetails):
 def free():
     return {"Hello": "World"}
 
+
 @app.get('/private')
 def private(username=Depends(auth_handler.auth_wrapper)):
     return {"name": username}
