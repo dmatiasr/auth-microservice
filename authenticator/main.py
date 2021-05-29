@@ -1,8 +1,8 @@
 from typing import Optional
 
 from fastapi import FastAPI, Depends, HTTPException
-from .auth import AuthHandler
-from .schemas import AuthDetails
+from auth import AuthHandler
+from schemas import AuthDetails
 
 
 app = FastAPI()
@@ -43,7 +43,7 @@ def login(auth_details: AuthDetails):
             user = x 
             break
 
-    if (user is None) or (not auth_handler.verify_password(auth_details.password, user.get("password")))
+    if (user is None) or (not auth_handler.verify_password(auth_details.password, user.get("password"))):
         raise HTTPException(status_code=401, detail="Invalid username nor password")
     token = auth_handler.encode_token(user.get("username"))
     
